@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0a0a0b">
+<title>Casa Brava — Academia de Combate</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --negro:#0a0a0b;
+    --negro-900:#0f1011;
+    --negro-800:#16171a;
+    --negro-700:#1e2024;
+    --negro-600:#2a2d33;
+    --rojo:#e11d2a;
+    --rojo-claro:#ff3b47;
+    --rojo-oscuro:#a30f1a;
+    --texto:#f4f4f5;
+    --texto-suave:#a1a1aa;
+    --texto-tenue:#6b6b73;
+    --verde:#16a34a;
+    --amarillo:#eab308;
+    --rojo-alerta:#dc2626;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  html{scroll-behavior:smooth;}
+
+  body{
+    background-color:var(--negro);
+    background-image:repeating-linear-gradient(45deg, rgba(255,255,255,0.012) 0px, rgba(255,255,255,0.012) 1px, transparent 1px, transparent 14px);
+    color:var(--texto);
+    font-family:'Inter',sans-serif;
+    line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3,.numero,.boton,.etiqueta{
+    font-family:'Oswald',sans-serif;
+  }
+
+  a{color:inherit;}
+
+  img,video{max-width:100%;display:block;}
+
+  .contenedor{
+    max-width:1120px;
+    margin:0 auto;
+    padding:0 28px;
+  }
+
+  /* ---------- header ---------- */
+
+  header{
+    position:sticky;
+    top:0;
+    z-index:10;
+    background:rgba(10,10,11,0.88);
+    -webkit-backdrop-filter:blur(6px);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--negro-600);
+  }
+
+  .barra-nav{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:18px 28px;
+    max-width:1120px;
+    margin:0 auto;
+  }
+
+  .marca{
+    font-size:20px;
+    font-weight:700;
+    letter-spacing:0.5px;
+    display:flex;
+    align-items:center;
+    gap:10px;
+  }
+
+  .marca span.acento{
+    color:var(--rojo);
+  }
+
+  .nav-cta{
+    background:var(--rojo);
+    color:var(--texto);
+    padding:10px 22px;
+    font-family:'Oswald',sans-serif;
+    font-weight:500;
+    font-size:15px;
+    border-radius:2px;
+    text-decoration:none;
+    transition:background 0.15s ease;
+  }
+
+  .nav-cta:hover{background:var(--rojo-claro);}
+
+  /* ---------- hero ---------- */
+
+  .hero{
+    padding:96px 28px 84px;
+    border-bottom:1px solid var(--negro-700);
+    position:relative;
+    overflow:hidden;
+  }
+
+  .hero::before{
+    content:"";
+    position:absolute;
+    right:-120px;
+    top:-160px;
+    width:520px;
+    height:520px;
+    border-radius:50%;
+    background:radial-gradient(circle, rgba(225,29,42,0.16) 0%, rgba(225,29,42,0) 70%);
+  }
+
+  .hero-interior{
+    max-width:1120px;
+    margin:0 auto;
+    position:relative;
+  }
+
+  .hero h1{
+    font-size:clamp(40px, 6vw, 74px);
+    font-weight:700;
+    line-height:1.02;
+    letter-spacing:0.5px;
+    max-width:820px;
+  }
+
+  .hero h1 em{
+    font-style:normal;
+    color:var(--rojo);
+  }
+
+  .hero p.sub{
+    margin-top:24px;
+    max-width:560px;
+    font-size:18px;
+    color:var(--texto-suave);
+  }
+
+  .hero-acciones{
+    margin-top:36px;
+    display:flex;
+    gap:16px;
+    flex-wrap:wrap;
+  }
+
+  .boton-primario{
+    background:var(--rojo);
+    color:var(--texto);
+    padding:14px 30px;
+    font-size:16px;
+    font-weight:500;
+    text-decoration:none;
+    border-radius:2px;
+    transition:background 0.15s ease;
+  }
+
+  .boton-primario:hover{background:var(--rojo-claro);}
+
+  .boton-secundario{
+    border:1px solid var(--negro-600);
+    color:var(--texto);
+    padding:14px 30px;
+    font-size:16px;
+    font-weight:500;
+    text-decoration:none;
+    border-radius:2px;
+    transition:border-color 0.15s ease, color 0.15s ease;
+  }
+
+  .boton-secundario:hover{border-color:var(--rojo);color:var(--rojo-claro);}
+
+  /* ---------- secciones generales ---------- */
+
+  section{
+    padding:88px 0;
+    border-bottom:1px solid var(--negro-700);
+  }
+
+  section:last-of-type{border-bottom:none;}
+
+  .encabezado-seccion{
+    max-width:620px;
+    margin-bottom:52px;
+  }
+
+  .encabezado-seccion h2{
+    font-size:clamp(28px, 3.4vw, 40px);
+    font-weight:600;
+    letter-spacing:0.3px;
+  }
+
+  .encabezado-seccion p{
+    margin-top:14px;
+    color:var(--texto-suave);
+    font-size:16px;
+    max-width:520px;
+  }
+
+  /* ---------- videos ---------- */
+
+  .grupo-videos + .grupo-videos{
+    margin-top:72px;
+  }
+
+  .titulo-grupo{
+    display:flex;
+    align-items:center;
+    gap:16px;
+    font-size:14px;
+    font-weight:500;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    color:var(--rojo-claro);
+  }
+
+  .titulo-grupo::after{
+    content:"";
+    flex:1;
+    height:1px;
+    background:var(--negro-700);
+  }
+
+  .nota-grupo{
+    margin-top:10px;
+    margin-bottom:28px;
+    max-width:620px;
+    font-size:15px;
+    color:var(--texto-suave);
+  }
+
+  .tarjeta-video{
+    background:var(--negro-800);
+    border:1px solid var(--negro-600);
+    border-radius:4px;
+    overflow:hidden;
+  }
+
+  .tarjeta-video .medio{
+    background:var(--negro-900);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    align-self:stretch;
+  }
+
+  .tarjeta-video video{
+    width:100%;
+    display:block;
+    background:var(--negro-900);
+  }
+
+  .tarjeta-video .texto-video{
+    padding:26px 28px 30px;
+  }
+
+  .tarjeta-video .etiqueta{
+    display:inline-block;
+    margin-bottom:10px;
+    font-size:12.5px;
+    font-weight:500;
+    text-transform:uppercase;
+    letter-spacing:1.2px;
+    color:var(--texto-tenue);
+  }
+
+  .tarjeta-video h4{
+    font-family:'Oswald',sans-serif;
+    font-size:21px;
+    font-weight:500;
+    line-height:1.2;
+    letter-spacing:0.2px;
+  }
+
+  .tarjeta-video p{
+    margin-top:12px;
+    font-size:15px;
+    color:var(--texto-suave);
+  }
+
+  /* video destacado (QR): casi cuadrado, texto a la derecha */
+
+  .tarjeta-video.destacada{
+    display:grid;
+    grid-template-columns:minmax(0,440px) minmax(0,1fr);
+    align-items:center;
+  }
+
+  .tarjeta-video.destacada video{
+    aspect-ratio:724/820;
+  }
+
+  .tarjeta-video.destacada .texto-video{
+    padding:36px 40px;
+  }
+
+  .tarjeta-video.destacada h4{
+    font-size:28px;
+  }
+
+  .tarjeta-video.destacada p{
+    font-size:16px;
+  }
+
+  /* videos de computadora: anchos, uno por fila */
+
+  .tarjeta-video.horizontal{
+    display:grid;
+    grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);
+    align-items:center;
+  }
+
+  .tarjeta-video.horizontal + .tarjeta-video.horizontal{
+    margin-top:20px;
+  }
+
+  .tarjeta-video.horizontal video{
+    aspect-ratio:2.1/1;
+  }
+
+  .tarjeta-video.horizontal .texto-video{
+    padding:30px 34px;
+  }
+
+  /* videos de celular: verticales, tres por fila */
+
+  .rejilla-celular{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:24px;
+  }
+
+  .tarjeta-video.celular .medio{
+    padding:28px;
+  }
+
+  .tarjeta-video.celular video{
+    max-width:250px;
+    aspect-ratio:392/850;
+    border-radius:18px;
+    border:1px solid var(--negro-600);
+  }
+
+  /* ---------- funcionalidades ---------- */
+
+  .rejilla-funciones{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:64px;
+  }
+
+  .columna-funcion h3{
+    font-size:14px;
+    text-transform:uppercase;
+    letter-spacing:1.5px;
+    color:var(--rojo-claro);
+    font-weight:500;
+    margin-bottom:28px;
+  }
+
+  .item-funcion{
+    padding:22px 0;
+    border-top:1px solid var(--negro-700);
+  }
+
+  .item-funcion:last-child{
+    border-bottom:1px solid var(--negro-700);
+  }
+
+  .item-funcion h4{
+    font-family:'Inter',sans-serif;
+    font-size:17px;
+    font-weight:600;
+    margin-bottom:6px;
+  }
+
+  .item-funcion p{
+    font-size:15px;
+    color:var(--texto-suave);
+  }
+
+  /* ---------- tabla comparativa ---------- */
+
+  .tabla-comparativa{
+    width:100%;
+    border-collapse:collapse;
+    background:var(--negro-800);
+    border:1px solid var(--negro-600);
+  }
+
+  .tabla-comparativa th{
+    font-family:'Oswald',sans-serif;
+    font-weight:500;
+    font-size:15px;
+    text-align:left;
+    padding:16px 22px;
+    border-bottom:1px solid var(--negro-600);
+  }
+
+  .tabla-comparativa th:first-child{color:var(--texto-tenue);}
+  .tabla-comparativa th:last-child{color:var(--rojo-claro);}
+
+  .tabla-comparativa td{
+    padding:16px 22px;
+    font-size:14.5px;
+    border-bottom:1px solid var(--negro-700);
+    vertical-align:top;
+  }
+
+  .tabla-comparativa tr:last-child td{border-bottom:none;}
+
+  .tabla-comparativa td:first-child{color:var(--texto-tenue);}
+  .tabla-comparativa td:last-child{color:var(--texto);}
+
+  /* ---------- semaforo ---------- */
+
+  .fila-semaforo{
+    display:flex;
+    gap:28px;
+    flex-wrap:wrap;
+    margin-top:40px;
+  }
+
+  .chip-semaforo{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:var(--negro-800);
+    border:1px solid var(--negro-600);
+    padding:12px 18px;
+    border-radius:2px;
+    font-size:14px;
+    color:var(--texto-suave);
+  }
+
+  .punto{
+    width:10px;
+    height:10px;
+    border-radius:50%;
+    flex-shrink:0;
+  }
+
+  .punto.verde{background:var(--verde);}
+  .punto.amarillo{background:var(--amarillo);}
+  .punto.alerta{background:var(--rojo-alerta);}
+
+  /* ---------- cierre ---------- */
+
+  .cierre{
+    padding:100px 0;
+    text-align:center;
+    border-bottom:none;
+  }
+
+  .cierre blockquote{
+    font-family:'Oswald',sans-serif;
+    font-size:clamp(24px, 3.6vw, 38px);
+    font-weight:500;
+    line-height:1.3;
+    max-width:760px;
+    margin:0 auto;
+  }
+
+  .cierre blockquote .rojo{color:var(--rojo-claro);}
+
+  /* ---------- footer ---------- */
+
+  footer{
+    padding:32px 28px;
+    text-align:center;
+    color:var(--texto-tenue);
+    font-size:13.5px;
+  }
+
+  /* ---------- responsive ---------- */
+
+  /* Monitores grandes: aprovechar el ancho sin estirar el texto */
+  @media (min-width:1600px){
+    .contenedor,
+    .barra-nav,
+    .hero-interior{max-width:1280px;}
+    .hero h1{max-width:900px;}
+    .hero p.sub{max-width:620px;font-size:19px;}
+  }
+
+  /* Laptops chicas y tablets horizontales */
+  @media (max-width:1000px){
+    .tarjeta-video.horizontal{grid-template-columns:1fr;}
+    .tarjeta-video.horizontal .texto-video{padding:26px 30px 30px;}
+    .rejilla-celular{grid-template-columns:1fr;gap:20px;}
+    .tarjeta-video.celular{
+      display:grid;
+      grid-template-columns:minmax(0,320px) minmax(0,1fr);
+      align-items:center;
+    }
+    .tarjeta-video.celular .texto-video{padding:28px 32px;}
+  }
+
+  /* Tablets verticales */
+  @media (max-width:860px){
+    .tarjeta-video.destacada{grid-template-columns:1fr;}
+    .tarjeta-video.destacada video{max-width:420px;}
+    .tarjeta-video.destacada .texto-video{padding:28px 30px 32px;}
+    .rejilla-funciones{grid-template-columns:1fr;gap:8px;}
+    .tabla-comparativa th,
+    .tabla-comparativa td{font-size:13.5px;}
+  }
+
+  /* Celulares grandes y tablets chicas */
+  @media (max-width:680px){
+    .tarjeta-video.celular{grid-template-columns:1fr;}
+    .tarjeta-video.celular .medio{padding:24px;}
+    .tarjeta-video.celular .texto-video{padding:24px 26px 28px;}
+    .encabezado-seccion{margin-bottom:44px;}
+  }
+
+  /* Celulares */
+  @media (max-width:520px){
+    .barra-nav{padding:14px 20px;}
+    .marca{font-size:18px;}
+    .nav-cta{padding:9px 16px;font-size:14px;}
+
+    .hero{padding:56px 20px 48px;}
+    .hero h1{font-size:clamp(32px, 10vw, 40px);}
+    .hero p.sub{font-size:16px;margin-top:18px;}
+    .hero-acciones{margin-top:28px;gap:12px;}
+    .hero-acciones a{flex:1 1 100%;text-align:center;}
+
+    section{padding:64px 0;}
+    .contenedor{padding:0 20px;}
+    .encabezado-seccion{margin-bottom:36px;}
+    .grupo-videos + .grupo-videos{margin-top:56px;}
+    .nota-grupo{margin-bottom:22px;}
+
+    .tarjeta-video .texto-video,
+    .tarjeta-video.destacada .texto-video,
+    .tarjeta-video.horizontal .texto-video,
+    .tarjeta-video.celular .texto-video{padding:22px 20px 24px;}
+    .tarjeta-video.destacada h4{font-size:23px;}
+    .tarjeta-video.destacada p{font-size:15px;}
+    .tarjeta-video.celular .medio{padding:20px;}
+
+    .fila-semaforo{gap:12px;margin-top:32px;}
+    .chip-semaforo{padding:10px 14px;font-size:13px;}
+    .cierre{padding:72px 0;}
+
+    /* La tabla se convierte en tarjetas "sin la app / con la app" apiladas */
+    .tabla-comparativa thead{display:none;}
+    .tabla-comparativa tr{display:block;border-bottom:1px solid var(--negro-600);}
+    .tabla-comparativa tr:last-child{border-bottom:none;}
+    .tabla-comparativa td{
+      display:block;
+      padding:12px 16px;
+      border-bottom:none;
+      font-size:14px;
+    }
+    .tabla-comparativa td:first-child{padding-bottom:4px;color:var(--texto-suave);}
+    .tabla-comparativa td:last-child{padding-top:6px;padding-bottom:14px;}
+    .tabla-comparativa td::before{
+      display:block;
+      margin-bottom:2px;
+      font-family:'Oswald',sans-serif;
+      font-size:11.5px;
+      font-weight:500;
+      letter-spacing:1.2px;
+      text-transform:uppercase;
+    }
+    .tabla-comparativa td:first-child::before{content:"Sin la app";color:var(--texto-tenue);}
+    .tabla-comparativa td:last-child::before{content:"Con la app";color:var(--rojo-claro);}
+  }
+
+  /* Celulares muy chicos */
+  @media (max-width:360px){
+    .barra-nav{padding:12px 16px;}
+    .hero{padding:48px 16px 40px;}
+    .contenedor{padding:0 16px;}
+    .tarjeta-video .texto-video,
+    .tarjeta-video.destacada .texto-video,
+    .tarjeta-video.horizontal .texto-video,
+    .tarjeta-video.celular .texto-video{padding:20px 16px 22px;}
+    .tarjeta-video.celular .medio{padding:16px;}
+    .tabla-comparativa td{padding-left:12px;padding-right:12px;}
+  }
+
+  /* Celular en horizontal: menos aire vertical */
+  @media (max-height:500px) and (orientation:landscape){
+    .hero{padding-top:44px;padding-bottom:40px;}
+    section{padding:56px 0;}
+  }
+
+  /* Pantallas táctiles: botones más cómodos de tocar */
+  @media (hover:none) and (pointer:coarse){
+    .nav-cta{padding:12px 20px;}
+    .boton-primario,
+    .boton-secundario{padding:15px 30px;}
+  }
+
+  :focus-visible{
+    outline:2px solid var(--rojo-claro);
+    outline-offset:2px;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{transition:none !important;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="barra-nav">
+    <div class="marca">CASA BRAVA<span class="acento">.</span></div>
+    <a class="nav-cta" href="#videos">Ver la app</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-interior">
+    <h1>Tu academia funciona sola. <em>Tus alumnos no quieren irse.</em></h1>
+    <p class="sub">La app que usan tus alumnos desde el celular y tú desde cualquier computadora. Cobros, asistencia y fichas de peleador, todo en un solo lugar. Sin papeles, sin Excel, sin WhatsApp para cobrar.</p>
+    <div class="hero-acciones">
+      <a class="boton-primario" href="#videos">Ver cómo funciona</a>
+      <a class="boton-secundario" href="#funciones">Conocer las funciones</a>
+    </div>
+  </div>
+</section>
+
+<section id="videos">
+  <div class="contenedor">
+    <div class="encabezado-seccion">
+      <h2>Así se ve en acción</h2>
+      <p>Siete recorridos reales por la app: cómo se pasa lista con el código QR, cómo se ve todo desde la computadora y cómo se ve desde el celular. Para el dueño, para el maestro y para el alumno.</p>
+    </div>
+
+    <!-- Grupo 1: pasar lista con QR -->
+    <div class="grupo-videos">
+      <h3 class="titulo-grupo">Pasar lista</h3>
+      <p class="nota-grupo">Lo que pasa cada vez que un alumno llega a entrenar.</p>
+
+      <div class="tarjeta-video destacada">
+        <div class="medio">
+          <video controls preload="metadata" playsinline>
+            <source src="media/QR.mp4" type="video/mp4">
+            Tu navegador no puede reproducir este video.
+          </video>
+        </div>
+        <div class="texto-video">
+          <span class="etiqueta">Asistencia por QR</span>
+          <h4>El alumno muestra su código, tú lo escaneas y listo</h4>
+          <p>El alumno llega, abre la app en su celular y enseña su código QR, el cuadrito de puntos que aparece en su pantalla. Tú lo apuntas con la cámara y en ese instante queda registrado quién vino, a qué clase y a qué hora. Sin firmar hojas, sin buscar nombres en una lista.</p>
+          <p>Cada asistencia suma puntos y alarga la racha del alumno. Con 10 clases seguidas gana una insignia, con 50 gana otra. Así, pasar lista también es lo que lo hace querer volver mañana.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grupo 2: desde la computadora -->
+    <div class="grupo-videos">
+      <h3 class="titulo-grupo">Desde la computadora</h3>
+      <p class="nota-grupo">Para administrar con calma desde recepción, la oficina o una tablet. Cada quien entra con su usuario y ve solo lo que le corresponde.</p>
+
+      <div class="tarjeta-video horizontal">
+        <div class="medio">
+          <video controls preload="metadata" playsinline style="aspect-ratio:1370/644;">
+            <source src="media/perfil-staff-admin-web.mp4" type="video/mp4">
+            Tu navegador no puede reproducir este video.
+          </video>
+        </div>
+        <div class="texto-video">
+          <span class="etiqueta">Dueño o recepción</span>
+          <h4>El panel que administra toda la academia</h4>
+          <p>Es tu centro de mando. De un vistazo ves cuánto entró este mes, cuántos alumnos tienes, quién debe, quién está al corriente y quién no ha venido. Registras un pago en efectivo, tarjeta o transferencia en segundos y el recibo llega solo al correo del alumno. También asignas qué disciplinas imparte cada maestro y descargas reportes sin hacer cuentas a mano.</p>
+        </div>
+      </div>
+
+      <div class="tarjeta-video horizontal">
+        <div class="medio">
+          <video controls preload="metadata" playsinline style="aspect-ratio:1356/612;">
+            <source src="media/perfil-maestro-web.mp4" type="video/mp4">
+            Tu navegador no puede reproducir este video.
+          </video>
+        </div>
+        <div class="texto-video">
+          <span class="etiqueta">Maestro</span>
+          <h4>Lo que el maestro sabe de sus alumnos</h4>
+          <p>El maestro entra y ve solo lo suyo: las disciplinas que imparte, sus clases y quién asistió a cada una. Puede abrir la ficha de cualquier alumno y saber cuántas clases lleva, su récord de peleas, su cinturón de BJJ, si está lesionado o si tiene un torneo cerca. Todo lo que necesita antes de mandarlo a un sparring o a competir.</p>
+        </div>
+      </div>
+
+      <div class="tarjeta-video horizontal">
+        <div class="medio">
+          <video controls preload="metadata" playsinline style="aspect-ratio:1136/616;">
+            <source src="media/perfil-alumno-web.mp4" type="video/mp4">
+            Tu navegador no puede reproducir este video.
+          </video>
+        </div>
+        <div class="texto-video">
+          <span class="etiqueta">Alumno</span>
+          <h4>Su historial y sus pagos, sin ir a preguntar</h4>
+          <p>Así lo ve el alumno cuando entra desde una computadora. Su ficha completa, todas las clases que ha tomado, su calendario de asistencia, sus torneos y sus cinturones. También sus pagos: cuándo vence su membresía, sus comprobantes y si está en verde, amarillo o rojo. Menos preguntas para ti en recepción.</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grupo 3: desde el celular -->
+    <div class="grupo-videos">
+      <h3 class="titulo-grupo">Desde el celular</h3>
+      <p class="nota-grupo">La misma app en el bolsillo. Sirve para el dueño que anda por el gym, para el maestro en el tatami y para el alumno en cualquier lugar.</p>
+
+      <div class="rejilla-celular">
+
+        <div class="tarjeta-video celular">
+          <div class="medio">
+            <video controls preload="metadata" playsinline>
+              <source src="media/perfil-staffadmin-movil.mp4" type="video/mp4">
+              Tu navegador no puede reproducir este video.
+            </video>
+          </div>
+          <div class="texto-video">
+            <span class="etiqueta">Dueño o recepción</span>
+            <h4>Administrar desde cualquier rincón del gym</h4>
+            <p>Todo el panel del dueño, pero en el celular. Cobras, revisas quién debe, consultas tus números del mes y pasas lista sin ir a recepción ni prender la computadora.</p>
+          </div>
+        </div>
+
+        <div class="tarjeta-video celular">
+          <div class="medio">
+            <video controls preload="metadata" playsinline>
+              <source src="media/perfil-maestro-movil.mp4" type="video/mp4">
+              Tu navegador no puede reproducir este video.
+            </video>
+          </div>
+          <div class="texto-video">
+            <span class="etiqueta">Maestro</span>
+            <h4>El maestro con su grupo en la mano</h4>
+            <p>Pasa lista, revisa quién llegó a su clase y consulta la ficha de cada alumno desde su propio celular. Pensado para cuando está en el ring o en el tatami, no en un escritorio.</p>
+          </div>
+        </div>
+
+        <div class="tarjeta-video celular">
+          <div class="medio">
+            <video controls preload="metadata" playsinline>
+              <source src="media/perfil-peleador-movil.mp4" type="video/mp4">
+              Tu navegador no puede reproducir este video.
+            </video>
+          </div>
+          <div class="texto-video">
+            <span class="etiqueta">Alumno</span>
+            <h4>Su ficha de peleador</h4>
+            <p>El perfil que hace que se sienta parte de algo serio: foto, apodo, récord de peleas y su nivel de striking, lucha y defensa, como en Tapology. Aquí ve sus puntos, su racha, sus insignias y su lugar en el ranking. También el semáforo de su pago, sus avisos y sus recibos.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section id="funciones">
+  <div class="contenedor">
+    <div class="encabezado-seccion">
+      <h2>Lo que hace por cada quien</h2>
+      <p>Una misma app, dos vistas: la del dueño que administra y la del alumno que entrena.</p>
+    </div>
+
+    <div class="rejilla-funciones">
+
+      <div class="columna-funcion">
+        <h3>Para ti — dueño o recepción</h3>
+
+        <div class="item-funcion">
+          <h4>Cobros y pagos</h4>
+          <p>Sabes exactamente quién te debe y quién está al corriente. La app avisa antes de que venzan las membresías. Registras efectivo, tarjeta o transferencia en segundos.</p>
+        </div>
+
+        <div class="item-funcion">
+          <h4>Pasar lista</h4>
+          <p>El alumno muestra su QR, tú lo escaneas y listo. Sin firmar hojas ni buscar nombres en una lista.</p>
+        </div>
+
+        <div class="item-funcion">
+          <h4>Fichas completas de alumnos</h4>
+          <p>Clases tomadas, récord de peleas, cinturón de BJJ, lesiones, torneos. Todo antes de mandarlos a un sparring o a competir.</p>
+        </div>
+
+        <div class="item-funcion">
+          <h4>Tus números claros</h4>
+          <p>Cuánto entraste este mes, cuántos alumnos tienes, quién no ha venido, quién lleva la racha más larga. Un panel que lo dice todo de un vistazo.</p>
+        </div>
+
+        <div class="item-funcion">
+          <h4>Notificaciones y recibos automáticos</h4>
+          <p>Avisos de pago, insignias y cambios de grado llegan solos a la app y al correo. Cada pago genera su comprobante sin que tengas que hacer nada.</p>
+        </div>
+      </div>
+
+      <div class="columna-funcion">
+        <h3>Para tus alumnos</h3>
+
+        <div class="item-funcion">
+          <h4>Su ficha de peleador</h4>
+          <p>Foto, apodo, récord, striking, lucha y defensa, como en Tapology. Se sienten parte de algo serio, no de un gimnasio más.</p>
+        </div>
+
+        <div class="item-funcion">
+          <h4>Saben si están al corriente</h4>
+          <p>Verde significa que están bien, amarillo que se acerca la fecha, rojo que deben. Sin sorpresas, sin pretextos.</p>
+        </div>
+
+        <div class="item-funcion">
+          <h4>Avisos que llegan solos</h4>
+          <p>Cinco días antes de que venza su membresía reciben una notificación y un correo. Renuevan a tiempo, tú cobras a tiempo.</p>
+        </div>
+
+        <div class="item-funcion">
+          <h4>Logros que los hacen volver</h4>
+          <p>Cada clase suma puntos. Hay rachas, insignias y un ranking, igual que un videojuego pero en el gym.</p>
+        </div>
+
+        <div class="item-funcion">
+          <h4>Su historial en el bolsillo</h4>
+          <p>Clases tomadas, asistencia, torneos y cinturones, todo desde el celular en cualquier momento.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="fila-semaforo">
+      <div class="chip-semaforo"><span class="punto verde"></span> Al corriente</div>
+      <div class="chip-semaforo"><span class="punto amarillo"></span> Por vencer</div>
+      <div class="chip-semaforo"><span class="punto alerta"></span> Vencido</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="contenedor">
+    <div class="encabezado-seccion">
+      <h2>Por qué esto cambia tu academia</h2>
+      <p>El antes y el después, en una sola tabla.</p>
+    </div>
+
+    <table class="tabla-comparativa">
+      <thead>
+        <tr>
+          <th>Sin la app</th>
+          <th>Con la app</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Listas en papel que se pierden</td><td>Todo registrado automáticamente</td></tr>
+        <tr><td>Llamas uno por uno para cobrar</td><td>La app avisa sola a quien debe</td></tr>
+        <tr><td>No sabes quién viene seguido</td><td>Ves rachas y asistencia al instante</td></tr>
+        <tr><td>Los alumnos se aburren y se van</td><td>Los puntos y logros los motivan</td></tr>
+        <tr><td>Excel para los pagos</td><td>Reportes listos para descargar</td></tr>
+        <tr><td>El alumno no sabe cuándo pagar</td><td>Lo ve en su celular en verde o rojo</td></tr>
+        <tr><td>Mandas recibos a mano por WhatsApp</td><td>El correo llega solo al instante</td></tr>
+        <tr><td>Avisas tú de los pagos vencidos</td><td>La app lo hace sola cada mañana</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<section class="cierre">
+  <div class="contenedor">
+    <blockquote>Tu gimnasio funciona <span class="rojo">solo</span>. Tus alumnos no quieren irse. Tú cobras a tiempo.</blockquote>
+  </div>
+</section>
+
+<footer>
+  Casa Brava — Academia de Combate
+</footer>
+
+</body>
+</html>
